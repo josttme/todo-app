@@ -27,7 +27,7 @@ export default function TodoSearch () {
         </span>
         <input
           type='text'
-          placeholder='Search...'
+          placeholder='Buscar tarea...'
           value={searchValue}
           onChange={onSearchValueChange}
           ref={inputRef}
