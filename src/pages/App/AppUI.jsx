@@ -7,6 +7,7 @@ import TodoList from '@components/TodoList'
 import TodoSearch from '@components/TodoSearch'
 import Modal from '@components/Modal/Modal'
 import TodoForm from '@/components/Modal/TodoForm'
+import TodoTitle from '../../components/TodoTitle'
 export default function AppUI () {
   const {
     error,
@@ -20,7 +21,7 @@ export default function AppUI () {
   return (
     <>
       <div className=' mb-10 w-11/12 max-w-lg h-14  grid place-items-center mx-auto lg:relative'>
-        <h1 className='text-center text-4xl font-bold'>ToDo App</h1>
+        <TodoTitle />
         <TodoButtonCreate
           setOpenModal={setOpenModal}
           openModal={openModal}
@@ -32,7 +33,7 @@ export default function AppUI () {
       <TodoList>
         {error && <p>Hubo un error</p>}
         {loading && <p>Loading...</p>}
-        {(!loading && !searchedTodos.length) && <p>Crea tu primet TODO</p>}
+        {(!loading && !searchedTodos.length) && <p>Crea tu primer ToDo</p>}
         {searchedTodos.map((todo) => (
           <TodoItem
             key={todo.id}

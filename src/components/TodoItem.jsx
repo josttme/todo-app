@@ -1,6 +1,6 @@
 export default function TodoItem ({ text, completed, onComplete, onDelete }) {
-  const isCompletedText = `text-white break-all text-xl text-center  text-white/80 text-center' ${completed && 'line-through decoration-[#b131e9] decoration-4'}`
-  const isCompletedChecked = `w-7 h-7  ${completed ? 'stroke-[#00de49] hover:stroke-[#00de49]' : 'stroke-[#05a4ff] hover:stroke-yellow-500'}`
+  const isCompletedText = `text-white break-all text-xl text-center  text-white/80 text-center' ${completed && 'line-through decoration-[#b131e9] decoration-3'}`
+  const isCompletedChecked = `w-7 h-7  ${completed ? 'stroke-[#00de49] lg:hover:stroke-[#00de49]' : 'stroke-[#05a4ff] lg:hover:stroke-yellow-500'}`
   return (
     <li className='bg-secondary min-h-[50px] py-1  w-full grid grid-cols-item justify-items-center rounded-lg items-center '>
       <span onClick={onComplete} className='cursor-pointer '>

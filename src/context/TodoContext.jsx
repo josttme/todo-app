@@ -13,6 +13,7 @@ function TodoProvider ({ children }) {
   } = useLocalStorage('TODOS_V1', [])
   const [searchValue, setSearchValue] = useState('')
   const [openModal, setOpenModal] = useState(false)
+  const [ctrlKPressed, setCtrlKPressed] = useState(false)
   const completedTodos = todos.filter(todo => !!todo.completed).length
   const totalTodos = todos.length
   let searchedTodos = []
@@ -46,22 +47,28 @@ function TodoProvider ({ children }) {
     const newTodos = [...todos]
     newTodos.splice(todoIndex, 1)
     saveTodos(newTodos)
+    /*  if (event.keyCode === 77) { // Tecla "m"
+        setOpenModal(false)
+      } */
+  }
+  const handleCtrlKPress = () => {
+    setCtrlKPressed(true)
   }
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.keyCode === 27) { // Tecla "Esc"
         setOpenModal(false)
+      } else if (event.keyCode === 77 && !openModal) { // Tecla "m"
+        event.preventDefault()
+        setOpenModal(true)
+      } else if (event.ctrlKey && event.keyCode === 75) { // Teclas "Ctrl + k"
+        event.preventDefault()
+        handleCtrlKPress()
       }
     }
-    openModal
-      ? document.addEventListener('keydown', handleKeyDown)
-      : document.removeEventListener('keydown', handleKeyDown)
-    console.log('Hola')
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown)
-    }
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
   }, [openModal])
-
   return (
     <TodoContext.Provider value={{
       loading,
@@ -76,7 +83,9 @@ function TodoProvider ({ children }) {
       deleteTodo,
       openModal,
       setOpenModal,
-      todos
+      todos,
+      ctrlKPressed,
+      setCtrlKPressed
     }}
     >
       {children}
