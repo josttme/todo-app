@@ -11,6 +11,7 @@ import TodoHeader from '../../components/TodoHeader'
 import TodosError from '../../components/TodosError'
 import TodosLoading from '../../components/TodosLoading'
 import TodosEmpty from '../../components/TodosEmpty'
+import { ChangeAlertWithStorageListener } from '../../components/ChangeAlert/ChangeAlert'
 /* const defaultTodos = [
   {
     id: 1,
@@ -50,7 +51,8 @@ function App () {
     setOpenModal, completedTodos, totalTodos,
     searchValue, setSearchValue, ctrlKPressed, setCtrlKPressed,
     addTodo,
-    todos
+    todos,
+    sincronizeTodos
   } = useTodos()
 
   return (
@@ -105,7 +107,7 @@ function App () {
           />
         </Modal>
       )}
-
+      <ChangeAlertWithStorageListener sincronize={sincronizeTodos} />
     </>
   )
 }

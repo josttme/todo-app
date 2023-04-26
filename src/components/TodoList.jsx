@@ -7,7 +7,7 @@ export default function TodoList ({ children, error, onError, loading, onLoading
       {(!loading && !totalTodos) && onEmptyTodos()}
       {(!!totalTodos && !searchedTodos.length) &&
       onEmptySearchResults()}
-      {searchedTodos.map(renderFunc)}
+      {(!loading && !error) && searchedTodos.map(renderFunc)}
 
     </section>
   )

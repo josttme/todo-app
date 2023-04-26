@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 
 export const useLocalStorage = (itemName, initialValue) => {
+  const [sincronizedItem, setSincronizedItem] = useState(false)
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(true)
   const [item, setItem] = useState(initialValue)
@@ -18,12 +19,13 @@ export const useLocalStorage = (itemName, initialValue) => {
         }
         setItem(parsedItem)
         setLoading(false)
+        setSincronizedItem(true)
       } catch (error) {
         setError(error)
       }
     }
     fetchItem()
-  }, []) // Agregamos el arreglo vacío como dependencia
+  }, [sincronizedItem]) // Agregamos el arreglo vacío como dependencia
 
   const saveItem = (newItem) => {
     try {
@@ -34,6 +36,9 @@ export const useLocalStorage = (itemName, initialValue) => {
       setError(error)
     }
   }
-
-  return { item, saveItem, loading, error }
+  const sincronizeItem = () => {
+    setLoading(true)
+    setSincronizedItem(false)
+  }
+  return { item, saveItem, loading, error, sincronizeItem }
 }
