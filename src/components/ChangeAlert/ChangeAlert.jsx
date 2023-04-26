@@ -1,6 +1,7 @@
-import WithStorageListener from './WithStorageListener'
+import { useStorageListener } from './useStorageListener'
 
-function ChangeAlert ({ show, toggleShow }) {
+function ChangeAlert ({ sincronize }) {
+  const { show, toggleShow } = useStorageListener(sincronize)
   if (show) {
     return (
       <div className='fixed inset-0 z-50 grid bg-black/30 place-content-center'>
@@ -28,6 +29,4 @@ function ChangeAlert ({ show, toggleShow }) {
     return null
   }
 }
-
-const ChangeAlertWithStorageListener = WithStorageListener(ChangeAlert)
-export { ChangeAlertWithStorageListener }
+export { ChangeAlert }
