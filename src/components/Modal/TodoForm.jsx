@@ -1,9 +1,7 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
-import { TodoContext } from '../../context/TodoContext'
+import React, { useEffect, useRef, useState } from 'react'
 
-export default function TodoForm () {
+export default function TodoForm ({ addTodo, setOpenModal, todos }) {
   const [newTodoValue, setNewTodoValue] = useState('')
-  const { addTodo, setOpenModal, todos } = useContext(TodoContext)
   const [textareaError, setTextareaError] = useState(false)
   const [messageError, setMessageError] = useState('')
 

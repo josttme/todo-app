@@ -1,10 +1,8 @@
-import { createContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
-import { useLocalStorage } from '../hooks/useLocalStorage'
+import { useLocalStorage } from './useLocalStorage'
 
-const TodoContext = createContext()
-
-function TodoProvider ({ children }) {
+function useTodos () {
   const {
     item: todos,
     saveItem: saveTodos,
@@ -47,9 +45,6 @@ function TodoProvider ({ children }) {
     const newTodos = [...todos]
     newTodos.splice(todoIndex, 1)
     saveTodos(newTodos)
-    /*  if (event.keyCode === 77) { // Tecla "m"
-        setOpenModal(false)
-      } */
   }
   const handleCtrlKPress = () => {
     setCtrlKPressed(true)
@@ -69,27 +64,22 @@ function TodoProvider ({ children }) {
     document.addEventListener('keydown', handleKeyDown)
     return () => document.removeEventListener('keydown', handleKeyDown)
   }, [openModal])
-  return (
-    <TodoContext.Provider value={{
-      loading,
-      error,
-      totalTodos,
-      completedTodos,
-      searchValue,
-      setSearchValue,
-      searchedTodos,
-      addTodo,
-      completeTodo,
-      deleteTodo,
-      openModal,
-      setOpenModal,
-      todos,
-      ctrlKPressed,
-      setCtrlKPressed
-    }}
-    >
-      {children}
-    </TodoContext.Provider>
-  )
+  return {
+    loading,
+    error,
+    totalTodos,
+    completedTodos,
+    searchValue,
+    setSearchValue,
+    searchedTodos,
+    addTodo,
+    completeTodo,
+    deleteTodo,
+    openModal,
+    setOpenModal,
+    todos,
+    ctrlKPressed,
+    setCtrlKPressed
+  }
 }
-export { TodoProvider, TodoContext }
+export { useTodos }

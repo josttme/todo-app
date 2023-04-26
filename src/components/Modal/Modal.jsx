@@ -1,9 +1,7 @@
-import { useContext, useRef } from 'react'
+import { useRef } from 'react'
 import { createPortal } from 'react-dom'
-import { TodoContext } from '../../context/TodoContext'
 
-export default function Modal ({ children }) {
-  const { setOpenModal } = useContext(TodoContext)
+export default function Modal ({ children, setOpenModal }) {
   const modalRef = useRef()
 
   const closeModal = () => {

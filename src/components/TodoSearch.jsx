@@ -1,8 +1,8 @@
-import { useContext, useEffect, useRef } from 'react'
-import { TodoContext } from '../context/TodoContext'
+import { useEffect, useRef } from 'react'
 
-export default function TodoSearch () {
-  const { searchValue, setSearchValue, ctrlKPressed, setCtrlKPressed } = useContext(TodoContext)
+export default function TodoSearch ({
+  searchValue, setSearchValue, ctrlKPressed, setCtrlKPressed, loading
+}) {
   const onSearchValueChange = (e) => {
     setSearchValue(e.target.value)
   }
@@ -32,7 +32,8 @@ export default function TodoSearch () {
           onChange={onSearchValueChange}
           ref={inputRef}
           onBlur={handleBlur}
-          className='block bg-secondary w-full h-7 py-3  pl-12 pr-5 lg:pr-16  placeholder-white/60 focus:outline-none'
+          disabled={loading}
+          className='block disabled:opacity-50 bg-secondary w-full h-7 py-3  pl-12 pr-5 lg:pr-16  placeholder-white/60 focus:outline-none'
         />
         <div className='absolute hidden lg:flex inset-y-0  items-center right-3'>
           <kbd className='inline-flex items-center px-[5px] py-[5px] font-sans  text-sm  text-white opacity-70  border rounded-md'>Ctrl K</kbd>
