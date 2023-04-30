@@ -13,7 +13,7 @@ export default {
         16: 'repeat(16, minmax(0, 1fr))',
 
         // Complex site-specific column configuration
-        item: '20% 1fr 20%'
+        item: '15% 1fr 10% 10%'
       }
     }
   },
