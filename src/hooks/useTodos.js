@@ -35,14 +35,14 @@ function useTodos () {
     })
     saveTodos(newTodos)
   }
-  const completeTodo = (text) => {
-    const todoIndex = todos.findIndex(todo => todo.text === text)
+  const completeTodo = (id) => {
+    const todoIndex = todos.findIndex(todo => todo.id === id)
     const newTodos = [...todos]
     newTodos[todoIndex].completed = !newTodos[todoIndex].completed
     saveTodos(newTodos)
   }
-  const deleteTodo = (text) => {
-    const todoIndex = todos.findIndex(todo => todo.text === text)
+  const deleteTodo = (id) => {
+    const todoIndex = todos.findIndex(todo => todo.id === id)
     const newTodos = [...todos]
     newTodos.splice(todoIndex, 1)
     saveTodos(newTodos)
