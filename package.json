@@ -40,5 +40,6 @@
   ],
   "author": "Josue Tapia <josue.tapia@live.com.ar>",
   "license": "MIT",
-  "description": "A to-do list application for managing and organizing your pending and completed tasks."
+  "description": "A to-do list application for managing and organizing your pending and completed tasks.",
+  "homepage": "https://do-it.jostt.me/"
 }

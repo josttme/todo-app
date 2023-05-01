@@ -11,7 +11,6 @@ function useTodos () {
     error
   } = useLocalStorage('TODOS_V1', [])
   const [searchValue, setSearchValue] = useState('')
-  const [openModal, setOpenModal] = useState(false)
   const [ctrlKPressed, setCtrlKPressed] = useState(false)
   const completedTodos = todos.filter(todo => !!todo.completed).length
   const totalTodos = todos.length
@@ -35,6 +34,21 @@ function useTodos () {
     })
     saveTodos(newTodos)
   }
+  const getTodo = (id) => {
+    const todoIndex = todos.findIndex(todo => todo.id === id
+    )
+    console.log(id)
+    console.log(todos[todoIndex])
+    return todos[todoIndex]
+  }
+  const editTodo = (id, newText) => {
+    const todoIndex = todos.findIndex(todo => todo.id === id)
+    const newTodos = [...todos]
+
+    console.log(newTodos[todoIndex])
+    newTodos[todoIndex].text = newText
+    saveTodos(newTodos)
+  }
   const completeTodo = (id) => {
     const todoIndex = todos.findIndex(todo => todo.id === id)
     const newTodos = [...todos]
@@ -53,10 +67,8 @@ function useTodos () {
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.keyCode === 27) { // Tecla "Esc"
-        setOpenModal(false)
-      } else if (event.keyCode === 77 && !openModal) { // Tecla "m"
+      } else if (event.keyCode === 77) { // Tecla "m"
         event.preventDefault()
-        setOpenModal(true)
       } else if (event.ctrlKey && event.keyCode === 75) { // Teclas "Ctrl + k"
         event.preventDefault()
         handleCtrlKPress()
@@ -64,7 +76,7 @@ function useTodos () {
     }
     document.addEventListener('keydown', handleKeyDown)
     return () => document.removeEventListener('keydown', handleKeyDown)
-  }, [openModal])
+  }, [])
   return {
     loading,
     error,
@@ -73,11 +85,11 @@ function useTodos () {
     searchValue,
     setSearchValue,
     searchedTodos,
-    addTodo,
     completeTodo,
+    addTodo,
+    getTodo,
     deleteTodo,
-    openModal,
-    setOpenModal,
+    editTodo,
     todos,
     ctrlKPressed,
     setCtrlKPressed,

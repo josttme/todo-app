@@ -1,14 +1,10 @@
 
-export default function TodoButtonCreate ({ setOpenModal, openModal }) {
-  const handleToggleModal = () => {
-    setOpenModal(!openModal)
-  }
-
+export default function TodoButtonCreate ({ onClick }) {
   return (
     <div className='w-14 h-14 fixed bottom-5 group   lg:absolute right-5 lg:bottom-0 lg:right-0 lg:w-24  z-50 '>
       <button
         className='w-14 h-14 rounded-full hover:bg-blue-700 hover:cursor-pointer border-2 border-[#b131e9]  bg-secondary grid place-content-center lg:w-24   rounded-fullftransform focus:outline-none focus:ring focus:ring-[#b131e9]  focus:ring-opacity-80'
-        onClick={() => handleToggleModal('mensaje')}
+        onClick={onClick}
       >
         <svg
           className=' w-10 h-10'

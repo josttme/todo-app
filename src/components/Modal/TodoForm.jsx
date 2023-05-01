@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-export default function TodoForm ({ addTodo, setOpenModal, todos }) {
-  const [newTodoValue, setNewTodoValue] = useState('')
+export default function TodoForm ({ submitLabel, label, submitEvent, defaultTodoText }) {
+  const navigate = useNavigate()
+  const [newTodoValue, setNewTodoValue] = useState(defaultTodoText || '')
   const [textareaError, setTextareaError] = useState(false)
   const [messageError, setMessageError] = useState('')
 
@@ -17,12 +19,13 @@ export default function TodoForm ({ addTodo, setOpenModal, todos }) {
     setTextareaError(false)
   }
   const handleCancel = () => {
-    setOpenModal(false)
+    navigate('/')
   }
   const handleSubmit = (e) => {
     e.preventDefault()
     const newTodoValue = textareaRef.current.value
     const newTodoValueTrimmed = newTodoValue
+    /*
       .replace(/^\s+|\s+$/g, '') // Eliminar espacios en blanco al principio y al final
       .replace(/\s{2,}/g, ' ') // Reemplazar más de 2 espacios con solo 1 espacio entre palabras
     const isDuplicate = todos.some(todo => todo.text === newTodoValueTrimmed)
@@ -32,9 +35,11 @@ export default function TodoForm ({ addTodo, setOpenModal, todos }) {
       handleInvalid()
     } else {
       textareaRef.current.setCustomValidity('')
-      addTodo(newTodoValueTrimmed)
-      setOpenModal(false)
-    }
+      */
+    console.log(newTodoValueTrimmed)
+    submitEvent(newTodoValueTrimmed)
+    navigate('/')
+    /* } */
   }
   const handleKeyDown = (e) => {
     e.keyCode === 13 && !e.shiftKey && handleSubmit(e)
@@ -58,12 +63,12 @@ export default function TodoForm ({ addTodo, setOpenModal, todos }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className='flex flex-col gap-2 bg-secondary p-4 rounded-lg w-11/12 mx-auto '
+      className='flex flex-col gap-2 bg-secondary p-4 rounded-lg w-11/12 max-w-lg mx-auto '
     >
       <label
         htmlFor='newTodo'
         className='text-2xl font-medium text-white text-center py-2'
-      >Nueva tarea
+      >{label}
       </label>
       <textarea
         className={`border-4  w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none rounded-lg  focus:border-blue-400  bg-white/90 ${isTextareaError}`}
@@ -88,7 +93,7 @@ export default function TodoForm ({ addTodo, setOpenModal, todos }) {
         <button
           className='px-6 w-full py-2 font-medium tracking-wide text-lg text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80'
           type='submit'
-        >Add
+        >{submitLabel}
         </button>
       </div>
       <div className={`text-red-950 text-center text-xl min-h-[30px] grid place-content-center rounded-lg font-medium ${messageError && 'bg-error'}`}>{messageError}</div>
